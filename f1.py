@@ -2,10 +2,7 @@
 """
 Simple HTTP server for exposing .m3u8 playlist on your local network 
 Usage::
-    python3 f1.py
-
-Original code for http server:
-    https://gist.github.com/mdonkers/63e115cc0c79b4f6b8b3a6b797e485c7
+    python3 f1.py [local IP]
 """
 import os
 import http.server
