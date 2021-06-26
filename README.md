@@ -1,6 +1,6 @@
 # morningstreams
 
-Sometime I want to watch acestream on my **computer** and sometimes on my **TV**
+Sometimes I want to watch acestream on my **computer** and sometimes on my **TV**
 (with LG WebOS) so I came up with the following solution which suited to both
 circumstances.
 
