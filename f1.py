@@ -29,10 +29,10 @@ if not username or not password:
     )
 
 # Check if ACE stream Engine is running
-# try:
-#     requests.get('http://127.0.0.1:6878/webui/api/service')
-# except requests.exceptions.ConnectionError:
-#     raise EnvironmentError('ACE stream engine is not running.')
+try:
+    requests.get(f'http://{LOCAL_IP}:6878/webui/api/service')
+except requests.exceptions.ConnectionError:
+    raise EnvironmentError('ACE stream engine is not running.')
 
 
 # Login Morningstreams
@@ -63,9 +63,13 @@ for link in response.json():
     except ValueError:
         pass
 
+
+# Save links in m3u8 file
 with open('playlist.m3u8', 'w') as f:
     f.write(m3u8)
 
+
+# Spawn http server
 httpd = socketserver.TCPServer(ADDRESS, http.server.SimpleHTTPRequestHandler)
 print(f'Starting httpd... http://{LOCAL_IP}:{PORT}/playlist.m3u8')
 try:
