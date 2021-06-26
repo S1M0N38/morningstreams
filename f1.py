@@ -7,17 +7,16 @@ Usage::
 Original code for http server:
     https://gist.github.com/mdonkers/63e115cc0c79b4f6b8b3a6b797e485c7
 """
-
 import os
 import http.server
 import socketserver
+import sys
 
 import requests
 
-
 PORT = 8080
 ADDRESS = ('', PORT)
-LOCAL_IP = '192.168.178.100' 
+LOCAL_IP = sys.argv[1]
 
 username = os.getenv('MORNINGSTREAMS_USERNAME')
 password = os.getenv('MORNINGSTREAMS_PASSWORD')
@@ -30,10 +29,10 @@ if not username or not password:
     )
 
 # Check if ACE stream Engine is running
-try:
-    requests.get('http://127.0.0.1:6878/webui/api/service')
-except requests.exceptions.ConnectionError:
-    raise EnvironmentError('ACE stream engine is not running.')
+# try:
+#     requests.get('http://127.0.0.1:6878/webui/api/service')
+# except requests.exceptions.ConnectionError:
+#     raise EnvironmentError('ACE stream engine is not running.')
 
 
 # Login Morningstreams
@@ -68,10 +67,7 @@ with open('playlist.m3u8', 'w') as f:
     f.write(m3u8)
 
 httpd = socketserver.TCPServer(ADDRESS, http.server.SimpleHTTPRequestHandler)
-print('Starting httpd...')
-print('Exposing server on these location:')
-print(f'- http://{LOCAL_IP}:{PORT}/playlist.m3u8')
-print(f'- http://127.0.0.1:{PORT}/playlist.m3u8')
+print(f'Starting httpd... http://{LOCAL_IP}:{PORT}/playlist.m3u8')
 try:
     httpd.serve_forever()
 except KeyboardInterrupt:
