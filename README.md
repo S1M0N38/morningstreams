@@ -13,10 +13,14 @@ circumstances.
 - computer with static LAN IP (mine is `192.168.178.100`) connect with Ethernet.
 
 Morningstreams account credentials are used to get acestream links.
-Credendials must be set as enviroment variables, e.g. in your `.bashrc`
+Credendials can be set as enviroment variables, e.g. in your `.bashrc`
 ```bash
-export MORNINGSTREAMS_USERNAME="my_morningstreams_username"
-export MORNINGSTREAMS_PASSWORD="my_morningstreams_password"
+export MORNINGSTREAMS_USERNAME="my_username"
+export MORNINGSTREAMS_PASSWORD="my_password"
+```
+or passed as arguments while running the script:
+```zsh
+python3 f1.py --username "my_username" --password "my_password"
 ```
 Docker is the simplest way to run acestream Engine on Mac OS.
 Python3 is used as scripting language to make requests to morningstreams API and
@@ -37,7 +41,7 @@ inspire you on how to develop your own.
 
 2. Then, from inside this repository, I run
    ```zsh
-   python3 f1.py 192.168.178.100
+   python3 f1.py --ip 192.168.178.100
    ```
    This script requests to morningstreams API acestreams link available and
    organize write them in `playlist.m3u8` file. Then a simple http is spawned so
@@ -56,6 +60,12 @@ inspire you on how to develop your own.
   `http://192.168.178.100:8080/playlist.m3u8`.
 
 -----
+>*pro-tip*: to see all the arguemnts of `f1.py` script run
+```bash
+python3 f1.py --help
+```
+
 >*pro-tip*: if you just watch the stream on the same computer which is running
 >the acestream engine, subsitute in all above command the local IP
->`192.168.178.100` with `127.0.0.1`, so you does not need a Ethernet connection.
+>`192.168.178.100` with `127.0.0.1`, so you does not need a Ethernet connection
+(`127.0.0.1` is the default for `--ip`).
