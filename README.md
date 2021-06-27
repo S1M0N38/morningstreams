@@ -1,6 +1,6 @@
 # morningstreams
 
-Sometime I want to watch acestream on my **computer** and sometimes on my **TV**
+Sometimes I want to watch acestream on my **computer** and sometimes on my **TV**
 (with LG WebOS) so I came up with the following solution which suited to both
 circumstances.
 
@@ -54,3 +54,8 @@ inspire you on how to develop your own.
 
 - **TV (LG WebOS)**: use F-Player to open 
   `http://192.168.178.100:8080/playlist.m3u8`.
+
+-----
+>*pro-tip*: if you just watch the stream on the same computer which is running
+>the acestream engine, subsitute in all above command the local IP
+>`192.168.178.100` with `127.0.0.1`, so you does not need a Ethernet connection.
