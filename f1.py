@@ -7,9 +7,9 @@ import socketserver
 import requests
 
 
-# Argument parsing
+# Arguments parsing
 parser = argparse.ArgumentParser(
-    description="Expose acestreams from morningstream in you local network.",
+    description="Expose acestreams from morningstreams in you local network.",
     epilog="Source code: https://github.com/S1M0N38/morningstreams",
 )
 parser.add_argument(
