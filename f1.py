@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 import argparse
-import os
 import http.server
+import json
+import os
 import socketserver
+from urllib import error, parse, request
 
 import requests
-
 
 # Arguments parsing
 parser = argparse.ArgumentParser(
@@ -46,45 +47,37 @@ if not args.username or not args.password:
 
 # Check if ACE stream Engine is running
 try:
-    requests.get(f"http://{args.ip}:6878/webui/api/service")
-except requests.exceptions.ConnectionError:
+    request.urlopen(f"http://{args.ip}:6878/webui/api/service")
+except error.URLError:
     raise EnvironmentError("ACE stream engine is not running.")
 
 
 # Login Morningstreams
 login_url = "https://api.morningstreams.com/api/users/login"
+login_url = "https://api.morningstreams.com/api/auth/login"
 credentials = {
     "username": args.username,
     "password": args.password,
-    "rememberMe": False,
 }
 response = requests.post(login_url, json=credentials)
-assert response.json()["success"]
 token = response.json()["token"]
-
-
-# Update IP
-update_id_url = "https://api.morningstreams.com/api/posts/update_ip"
-headers = {"authorization": token}
-ace_ip = {"aceIP": requests.get("https://wtfismyip.com/text").text.strip()}
-response = requests.post(update_id_url, headers=headers, json=ace_ip)
-assert response.json()["aceIP"] == ace_ip["aceIP"]
+headers = {"authorization": f"bearer {token}"}
 
 
 # ACE Stream
-posts_url = "https://api.morningstreams.com/api/posts"
-response = requests.get(posts_url, headers=headers)
-m3u8 = "#EXTM3U\n"
-for link in response.json():
-    try:
-        int(link["text"], 16)  # check if is a acestream link
-        m3u8 += f'#EXTINF:-1,{link["title"]}\n'
-        m3u8 += f'http://{args.ip}:6878/ace/getstream?id={link["text"]}\n'
-    except ValueError:
-        pass
+acestream_url = "https://api.morningstreams.com/api/acestreams"
+response = requests.get(acestream_url, headers=headers)
 
 
 # Save links in m3u8 file
+m3u8 = "#EXTM3U\n"
+for link in response.json():
+    try:
+        int(link["contentId"], 16)  # check if is a acestream link
+        m3u8 += f'#EXTINF:-1,{link["title"]}\n'
+        m3u8 += f'http://{args.ip}:6878/ace/getstream?id={link["contentId"]}\n'
+    except ValueError:
+        pass
 with open("playlist.m3u8", "w") as f:
     f.write(m3u8)
 
