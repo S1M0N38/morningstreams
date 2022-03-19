@@ -16,8 +16,8 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument(
     "--ip",
-    action='store_const',
-    default='127.0.0.1',
+    action="store_const",
+    default="127.0.0.1",
     const=socket.gethostbyname(socket.gethostname()),
     help="m3u8 will be exposed on the machine ip address",
 )
@@ -25,6 +25,11 @@ parser.add_argument(
     "--port",
     default=8080,
     help="port where the m3u8 will be exposed",
+)
+parser.add_argument(
+    "--mpv",
+    action="store_true",
+    help="open streams with mpv",
 )
 parser.add_argument(
     "--username",
@@ -86,10 +91,23 @@ with open("playlist.m3u8", "w") as f:
 
 # Spawn http server
 address = ("", args.port)
+url = "http://{args.ip}:{args.port}/playlist.m3u8"
 httpd = socketserver.TCPServer(address, http.server.SimpleHTTPRequestHandler)
-print(f"\nStarting httpd at http://{args.ip}:{args.port}/playlist.m3u8")
+print(f"\nStarting httpd at {url}")
 print(f"Press Ctrl+C to stop the server.")
 try:
+    if args.mpv:
+        options = """\
+            --no-resume-playback\
+            --rebase-start-time=no\
+            --cache=no\
+            --cache-pause-wait=3\
+            --audio-buffer=0\
+            --stream-buffer-size=4k\
+            --pause=no\
+            """
+        print(f"Opening streams with mpv ...")
+        os.system(f"mpv {options} playlist.m3u8")
     httpd.serve_forever()
 except KeyboardInterrupt:
     pass
