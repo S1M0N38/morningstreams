@@ -3,6 +3,7 @@ import argparse
 import http.server
 import json
 import os
+import socket
 import socketserver
 from urllib import error, parse, request
 
@@ -15,8 +16,10 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument(
     "--ip",
-    default="127.0.0.1",
-    help="ip where the m3u8 will be exposed",
+    action='store_const',
+    default='127.0.0.1',
+    const=socket.gethostbyname(socket.gethostname()),
+    help="m3u8 will be exposed on the machine ip address",
 )
 parser.add_argument(
     "--port",
@@ -51,9 +54,7 @@ try:
 except error.URLError:
     raise EnvironmentError("ACE stream engine is not running.")
 
-
 # Login Morningstreams
-login_url = "https://api.morningstreams.com/api/users/login"
 login_url = "https://api.morningstreams.com/api/auth/login"
 credentials = {
     "username": args.username,
@@ -62,16 +63,18 @@ credentials = {
 response = requests.post(login_url, json=credentials)
 token = response.json()["token"]
 headers = {"authorization": f"bearer {token}"}
-
+print(f"\nLogged in as {args.username} ✓")
 
 # ACE Stream
 acestream_url = "https://api.morningstreams.com/api/acestreams"
-response = requests.get(acestream_url, headers=headers)
-
+response = requests.get(acestream_url, headers=headers).json()
+print(f"\nFound {len(response)} streams:")
+for stream in response:
+    print(f"  - {stream['title']} 👍 {stream['likesCount']}")
 
 # Save links in m3u8 file
 m3u8 = "#EXTM3U\n"
-for link in response.json():
+for link in response:
     try:
         int(link["contentId"], 16)  # check if is a acestream link
         m3u8 += f'#EXTINF:-1,{link["title"]}\n'
@@ -81,11 +84,11 @@ for link in response.json():
 with open("playlist.m3u8", "w") as f:
     f.write(m3u8)
 
-
 # Spawn http server
 address = ("", args.port)
 httpd = socketserver.TCPServer(address, http.server.SimpleHTTPRequestHandler)
-print(f"Starting httpd... http://{args.ip}:{args.port}/playlist.m3u8")
+print(f"\nStarting httpd at http://{args.ip}:{args.port}/playlist.m3u8")
+print(f"Press Ctrl+C to stop the server.")
 try:
     httpd.serve_forever()
 except KeyboardInterrupt:
