@@ -16,10 +16,8 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument(
     "--ip",
-    action="store_const",
     default="127.0.0.1",
-    const=socket.gethostbyname(socket.gethostname()),
-    help="m3u8 will be exposed on the machine ip address",
+    help="ip where the m3u8 will be exposed",
 )
 parser.add_argument(
     "--port",
@@ -91,7 +89,7 @@ with open("playlist.m3u8", "w") as f:
 
 # Spawn http server
 address = ("", args.port)
-url = "http://{args.ip}:{args.port}/playlist.m3u8"
+url = f"http://{args.ip}:{args.port}/playlist.m3u8"
 httpd = socketserver.TCPServer(address, http.server.SimpleHTTPRequestHandler)
 print(f"\nStarting httpd at {url}")
 print(f"Press Ctrl+C to stop the server.")
