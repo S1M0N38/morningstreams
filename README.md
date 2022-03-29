@@ -66,6 +66,7 @@ python3 f1.py --help
 ```
 
 >*pro-tip*: if you just watch the stream on the same computer which is running
->the acestream engine, subsitute in all above command the local IP
->`192.168.178.100` with `127.0.0.1`, so you does not need a Ethernet connection
-(`127.0.0.1` is the default for `--ip`).
+>the acestream engine and [mpv](https://mpv.io) is installed, simply use
+```bash
+python3 f1.py --mpv
+```
