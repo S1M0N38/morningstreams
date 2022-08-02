@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 import argparse
-import http.server
 import json
 import os
-import socket
 import socketserver
-from urllib import error, parse, request
-
-import requests
+from http import client, server
+from urllib import error, request
 
 # Arguments parsing
 parser = argparse.ArgumentParser(
@@ -58,22 +55,27 @@ except error.URLError:
     raise EnvironmentError("ACE stream engine is not running.")
 
 # Login Morningstreams
-login_url = "https://api.morningstreams.com/api/auth/login"
+conn = client.HTTPSConnection("api.morningstreams.com")
 credentials = {
     "username": args.username,
     "password": args.password,
 }
-response = requests.post(login_url, json=credentials)
-token = response.json()["token"]
+
+headers = {"Content-type": "application/json"}
+conn.request("POST", "/api/auth/login", json.dumps(credentials), headers)
+response = conn.getresponse()
+token = json.loads(response.read().decode("utf-8"))["token"]
 headers = {"authorization": f"bearer {token}"}
 print(f"\nLogged in as {args.username} ✓")
 
 # ACE Stream
-acestream_url = "https://api.morningstreams.com/api/acestreams"
-response = requests.get(acestream_url, headers=headers).json()
-print(f"\nFound {len(response)} streams:")
-for stream in response:
+conn.request("GET", "/api/acestreams", headers=headers)
+response = conn.getresponse()
+streams = json.loads(response.read().decode("utf-8"))
+print(f"\nFound {len(streams)} streams:")
+for stream in streams:
     print(f"  - {stream['title']} 👍 {stream['likesCount']}")
+conn.close()
 
 # Save links in m3u8 file
 m3u8 = "#EXTM3U\n"
@@ -90,9 +92,9 @@ with open("playlist.m3u8", "w") as f:
 # Spawn http server
 address = ("", args.port)
 url = f"http://{args.ip}:{args.port}/playlist.m3u8"
-httpd = socketserver.TCPServer(address, http.server.SimpleHTTPRequestHandler)
+httpd = socketserver.TCPServer(address, server.SimpleHTTPRequestHandler)
 print(f"\nStarting httpd at {url}")
-print(f"Press Ctrl+C to stop the server.")
+print("Press Ctrl+C to stop the server.")
 try:
     if args.mpv:
         options = """\
@@ -104,7 +106,7 @@ try:
             --stream-buffer-size=4k\
             --pause=no\
             """
-        print(f"Opening streams with mpv ...")
+        print("Opening streams with mpv ...")
         os.system(f"mpv {options} playlist.m3u8")
     httpd.serve_forever()
 except KeyboardInterrupt:
