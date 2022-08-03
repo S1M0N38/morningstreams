@@ -79,7 +79,7 @@ conn.close()
 
 # Save links in m3u8 file
 m3u8 = "#EXTM3U\n"
-for link in response:
+for link in streams:
     try:
         int(link["contentId"], 16)  # check if is a acestream link
         m3u8 += f'#EXTINF:-1,{link["title"]}\n'
