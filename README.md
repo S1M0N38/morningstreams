@@ -4,6 +4,31 @@ Sometimes I want to watch acestream on my **computer** and sometimes on my **TV*
 (with LG WebOS) so I came up with the following solution which suited to both
 circumstances.
 
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━f1.py━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                                                               ┃
+┃                                        GET acestream ids      ┃
+┃                       ┌─────────────┐─────────────────────────╋────────▶┌────────────────────────┐
+┃                       │   client    │                         ┃         │ api.morningstreams.com │
+┃                       └─────────────┘◀────────────────────────╋─────────└────────────────────────┘
+┃                              │         acestream ids          ┃
+┃                              │                                ┃
+┃                      generate playlist                        ┃
+┃                              │                                ┃ GET playlist.m3u8
+┃ server───────────────────────┼─────────────────────────────┐◀─╋───────────────────┌──────────────┐
+┃ │                            ▼                             │  ┃                   │ video player │
+┃ │ ┏━playlist.m3u8━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  │──╋──────────────────▶└──────────────┘
+┃ │ ┃ #EXTM3U                                             ┃  │  ┃  playlist.m3u8                   ▲
+┃ │ ┃ #EXTINF:-1, Server 1                                ┃  │  ┃                           stream │
+┃ │ ┃ http://[--ip]:[--port]/ace/getstream?id=11fbb885a...┃  │  ┃                                  │
+┃ │ ┃ #EXTINF:-1, Server 2 (backup)                       ┃  │  ┃ ┌──────────────────────────────┐ │
+┃ │ ┃ http://[--ip]:[--port]/ace/getstream?id=32aeedc98...┃  │  ┃ │       acestream engine       │ │
+┃ │ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  │  ┃ │ (wrapped in docker container │ │
+┃ └──────────────────────────────────────────────────────────┘  ┃ │        if necessary)         │◀┘
+┃                                                               ┃ │                              │
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ └──────────────────────────────┘
+```
+
 
 ### Requirements
 
