@@ -2,8 +2,8 @@ import pathlib
 import time
 
 from src.cli import args
-from src.engine import AcestreamEngine
 from src.client import MorningstreamsClient
+from src.engine import AcestreamEngine
 from src.server import HTTPServer
 
 

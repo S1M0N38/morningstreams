@@ -1,7 +1,7 @@
-import time
 import subprocess
-import urllib.request
+import time
 import urllib.error
+import urllib.request
 
 
 class AcestreamEngine:

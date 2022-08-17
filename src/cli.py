@@ -1,6 +1,5 @@
-import os
 import argparse
-
+import os
 
 # Arguments parsing
 parser = argparse.ArgumentParser(
