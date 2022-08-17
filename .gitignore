@@ -1,6 +1,8 @@
 # m3u8 file are dinamically update
 *.m3u8
 
+# acestream engine
+acestream.engine/
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,vim,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,vim,python
