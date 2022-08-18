@@ -21,7 +21,7 @@ class AcestreamEngine:
             return
         print("Starting Acestream engine...", end=" ", flush=True)
         start_time = time.time()
-        subprocess.Popen([self.start_script])
+        subprocess.Popen(["sudo", self.start_script])
         while time.time() - start_time < self.timeout:
             if self.is_running:
                 print("✓")
@@ -36,7 +36,8 @@ class AcestreamEngine:
             print("✓")
             return
         start_time = time.time()
-        subprocess.Popen([self.stop_script])
+        process = subprocess.Popen(["sudo", self.stop_script])
+        process.wait()
         while time.time() - start_time < self.timeout:
             if not self.is_running:
                 print("✓")

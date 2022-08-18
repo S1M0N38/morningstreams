@@ -8,7 +8,8 @@ class HTTPServer:
         self.handler = http.server.SimpleHTTPRequestHandler
         self.server = socketserver.TCPServer((ip, port), self.handler)
         self.server_thread = threading.Thread(
-            target=self.server.serve_forever, daemon=True
+            target=self.server.serve_forever,
+            daemon=True,
         )
 
     def start(self):
