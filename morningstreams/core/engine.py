@@ -3,25 +3,25 @@ import time
 import urllib.error
 import urllib.request
 
+import click
+
 
 class AcestreamEngine:
-    def __init__(self, start_script, stop_script, timeout=10):
-        self.start_script = start_script
-        self.stop_script = stop_script
+    def __init__(self, start_cmd, stop_cmd, timeout=10):
+        self.start_cmd = start_cmd
+        self.stop_cmd = stop_cmd
         self.timeout = timeout
 
     def start(self):
         if self.is_running:
-            msg = "Another instance of Acestream engine is already running"
-            question = "Would you like to restart it? [No] "
-            restart = input(f"{msg}\n{question}") or "No"
-            if restart.upper() in ["Y", "YES"]:
+            click.echo("Another instance of Acestream engine is running.")
+            if click.confirm("Would you like to restart it?"):
                 self.stop()
                 self.start()
             return
         print("Starting Acestream engine...", end=" ", flush=True)
         start_time = time.time()
-        subprocess.Popen(["sudo", self.start_script])
+        subprocess.Popen(self.start_cmd, stdout=subprocess.DEVNULL)
         while time.time() - start_time < self.timeout:
             if self.is_running:
                 print("✓")
@@ -36,7 +36,7 @@ class AcestreamEngine:
             print("✓")
             return
         start_time = time.time()
-        process = subprocess.Popen(["sudo", self.stop_script])
+        process = subprocess.Popen(self.stop_cmd, stdout=subprocess.DEVNULL)
         process.wait()
         while time.time() - start_time < self.timeout:
             if not self.is_running:
