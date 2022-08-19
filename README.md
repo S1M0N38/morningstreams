@@ -60,7 +60,7 @@ morningstreams run
 The Command Line Interface (CLI) is pretty minimal; when in doubt just use
 `--help`. Here are some examples
 
-```bash
+```
 $ morningstreams --help
 
 Usage: morningstreams [OPTIONS] COMMAND [ARGS]...
@@ -79,7 +79,7 @@ Commands:
   status   Show login status
 ```
 
-```bash
+```
 $ morningstreams run --help
 
 Usage: morningstreams run [OPTIONS]
