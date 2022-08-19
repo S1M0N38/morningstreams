@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "morningstreams"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["S1M0N38 <bertolottosimone@gmail.com>"]
 license = "MIT"
@@ -12,12 +12,12 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.9"
+click = "^8.1.3"
 
 [tool.poetry.dev-dependencies]
 
 [tool.poetry.scripts]
-ms-install = "morningstreams.main:install"
-ms-run = "morningstreams.main:run"
+morningstreams = "morningstreams.cli:cli"
 
 [tool.black]
 line-length = 80
