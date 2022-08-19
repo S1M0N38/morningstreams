@@ -138,6 +138,8 @@ def _engine_commands():
             [
                 "docker",
                 "run",
+                "--pull",
+                "never",
                 "--name",
                 "acestream",
                 "--publish",
