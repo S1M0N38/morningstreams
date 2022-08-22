@@ -1,5 +1,8 @@
 # morningstreams
 
+> This content is not affiliated with, endorsed, sponsored, or specifically
+> approved by Morningstreams.
+
 Sometimes I want to watch acestream on my **computer** and sometimes on my
 **TV** (with LG WebOS) so I came up with the following solution which suited to
 both circumstances. I expose a [m3u8](https://en.wikipedia.org/wiki/M3U)
@@ -8,7 +11,7 @@ using [acestream HTTP API](https://docs.acestream.net/en/developers/api-referenc
 
 I decided to automate the whole process of starting a
 [morningstreams](https://morningstreams.com) stream in a single python CLI
-program. It can be run on macOS and on raspberry pi.
+program. It can be run on **macOS** and on **raspberry pi**.
 
 ## :arrow_down: Installation
 
@@ -23,7 +26,7 @@ look, otherwise you can still use your favorite package manager (e.g. pip).
 
 - You need a morningstreams account (https://discord.gg/fYj5qZW).
 - A VPN is suggest but not necessary 
-([install VPN on RPI](https://gist.github.com/S1M0N38/77ad8d3cb5e481aa802d43636881279c)
+([install VPN on RPI](https://gist.github.com/S1M0N38/77ad8d3cb5e481aa802d43636881279c))
 
 I develop and test this program on macOS (Intel processor with Big Sur) and on
 Raspberry Pi (Raspberry Pi 3 Model B with Raspbian 11).
