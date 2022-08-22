@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "morningstreams"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["S1M0N38 <bertolottosimone@gmail.com>"]
 license = "MIT"
