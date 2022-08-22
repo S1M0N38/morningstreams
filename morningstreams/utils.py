@@ -14,12 +14,6 @@ from .core.client import MorningstreamsClient
 from .core.engine import AcestreamEngine
 from .core.server import HTTPServer
 
-# paths #######################################################################
-
-repo = pathlib.Path(__file__).parent.parent
-path_playlist = repo / "playlist.m3u8"
-
-
 # platforms ###################################################################
 
 
@@ -46,6 +40,7 @@ def is_macos():
 def installer_rpi():
 
     # Download acestream-engine for Rasberry PI
+    repo = pathlib.Path(__file__).parent.parent
     version = "acestream_3.1.48_Py2.7.16%2B_LinaroNDK_webUI_ARMv7.tar.gz"
     url = (
         "https://github.com/moromete/repository.moromete.addons/"
@@ -160,7 +155,7 @@ def _engine_commands():
         raise EnvironmentError(msg)
 
 
-def run(username, password, args):
+def run(username, password, path_playlist, args):
 
     # Remove previous playlist
     path_playlist.unlink(missing_ok=True)
