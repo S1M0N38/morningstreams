@@ -7,7 +7,6 @@ from . import utils
 
 repo = pathlib.Path(__file__).parent.parent
 path_credentials = repo / "credentials.txt"
-path_playlist = repo / "playlist.m3u8"
 
 
 @click.group()
@@ -104,7 +103,7 @@ def run(**args):
     with open(path_credentials) as f:
         username = f.readline().strip()
         password = f.readline().strip()
-    utils.run(username, password, path_playlist, args)
+    utils.run(username, password, args)
 
 
 if __name__ == "__main__":
