@@ -39,7 +39,7 @@ must be run it the background while using this program.
 
 To install the acestream engine use
 ```bash
-moringstreams install
+morningstreams install
 ```
 This operation is required to be run only the first time. You can run it again
 if you want to reinstall acestream engine (on raspberry you likely need a reboot
@@ -47,7 +47,7 @@ and the run `moringstreams install` again).
 
 Authenticate with
 ```bash
-moringstreams login
+morningstreams login
 ```
 This command will ask to input your morningstreams credentials and store them
 for the future. If you don't want to type the credentials you can provide them
