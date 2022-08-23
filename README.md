@@ -3,6 +3,9 @@
 > This content is not affiliated with, endorsed, sponsored, or specifically
 > approved by Morningstreams.
 
+> This project is the successor of the simple script
+> [morniningstream.py](https://gist.github.com/S1M0N38/7f8ca02279447ea3ed8529a450e61c11).
+
 Sometimes I want to watch acestream on my **computer** and sometimes on my
 **TV** (with LG WebOS) so I came up with the following solution which suited to
 both circumstances. I expose a [m3u8](https://en.wikipedia.org/wiki/M3U)
@@ -145,4 +148,7 @@ Just use an alias in your .zshrc/.bashrc to avoid to type this all the time:
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ └────────────────────────┘
 ```
 
-TODO: explain the schematic
+## :ballot_box_with_check: TODOs
+- [ ] Explain how it works
+- [ ] Healthcheck while stream is running
+- [ ] Option to automatically start player
