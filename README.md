@@ -13,7 +13,7 @@ playlist on my local network which streams point to a running acestream engine
 using [acestream HTTP API](https://docs.acestream.net/en/developers/api-reference/#playback-endpoints).
 
 I decided to automate the whole process of starting a
-[morningstreams](https://morningstreams.com) stream in a single python CLI
+morningstreams stream in a single python CLI
 program. It can be run on **macOS** and on **raspberry pi**.
 
 ## :arrow_down: Installation
@@ -27,7 +27,7 @@ look, otherwise you can still use your favorite package manager (e.g. pip).
 
 ## :zap: Usage
 
-- You need a morningstreams account (https://discord.gg/fYj5qZW).
+- You need a morningstreams account
 - A VPN is suggest but not necessary 
 ([install VPN on RPI](https://gist.github.com/S1M0N38/77ad8d3cb5e481aa802d43636881279c))
 
