@@ -43,7 +43,7 @@ morningstreams install
 ```
 This operation is required to be run only the first time. You can run it again
 if you want to reinstall acestream engine (on raspberry you likely need a reboot
-and the run `moringstreams install` again). 
+and the run `morningstreams install` again). 
 
 Authenticate with
 ```bash
@@ -52,7 +52,7 @@ morningstreams login
 This command will ask to input your morningstreams credentials and store them
 for the future. If you don't want to type the credentials you can provide them
 using `MORNINGSTREAMS_USERNAME` and `MORNINGSTREAMS_PASSWORD` environment
-variables (Even if you use env vars you must run `moringstreams login`).
+variables (Even if you use env vars you must run `morningstreams login`).
 
 Run the acestream engine in the background, get streams from morningstreams and
 expose m3u8 playlist on your local network with
@@ -152,3 +152,4 @@ Just use an alias in your .zshrc/.bashrc to avoid to type this all the time:
 - [ ] Explain how it works
 - [ ] Healthcheck while stream is running
 - [ ] Option to automatically start player
+- [ ] Weekend schedule
