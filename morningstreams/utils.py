@@ -137,6 +137,8 @@ def _engine_commands():
             [
                 "docker",
                 "run",
+                "--platform",
+                "linux/amd64",
                 "--pull",
                 "never",
                 "--name",
