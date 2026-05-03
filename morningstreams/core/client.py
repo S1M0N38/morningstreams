@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import http.client
 import json
 
@@ -6,8 +8,8 @@ class MorningstreamsClient:
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.client = None
-        self.token = None
+        self.client: http.client.HTTPSConnection | None = None
+        self.token: str | None = None
 
     def __enter__(self):
         self.client = http.client.HTTPSConnection("api.morningstreams.com")
@@ -15,6 +17,7 @@ class MorningstreamsClient:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        assert self.client is not None
         self.client.close()
 
     def login(self):
@@ -22,6 +25,7 @@ class MorningstreamsClient:
         path = "/api/auth/login"
         credentials = {"username": self.username, "password": self.password}
         headers = {"Content-type": "application/json"}
+        assert self.client is not None
         self.client.request("POST", path, json.dumps(credentials), headers)
         response = json.loads(self.client.getresponse().read().decode("utf-8"))
         if "token" in response:
@@ -34,6 +38,7 @@ class MorningstreamsClient:
     def get_streams(self):
         print("Getting acestreams...", end=" ", flush=True)
         assert self.token is not None
+        assert self.client is not None
         path = "/api/acestreams"
         headers = {"authorization": f"bearer {self.token}"}
         self.client.request("GET", path, headers=headers)
