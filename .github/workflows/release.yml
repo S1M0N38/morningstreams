@@ -19,6 +19,7 @@ jobs:
         with:
           release-type: python
           token: ${{ secrets.GITHUB_TOKEN }}
+          skip-github-release: false
 
   publish:
     needs: release
