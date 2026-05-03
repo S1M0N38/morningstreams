@@ -22,11 +22,12 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = "morningstreams/__init__.py"
 
-[tool.black]
-line-length = 80
-target-version = ['py39', 'py310']
-include = '\.pyi?$'
+[dependency-groups]
+dev = [
+  "ruff>=0.14.13",
+  "ty>=0.0.12",
+]
 
-[tool.isort]
-profile = "black"
-skip = ["acestream.engine"]
+[tool.ruff]
+lint.extend-select = ["I"]
+lint.task-tags = ["FIX", "HACK", "NOTE", "PERF", "TEST", "TODO", "WARN"]
