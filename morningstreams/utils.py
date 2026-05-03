@@ -102,7 +102,7 @@ def installer_rpi():
 def installer_macos():
 
     # Download and install acestream-engine for MacOs
-    image = "wafy80/acestream"
+    image = _ACESTREAM_IMAGE
     print("Removing old acestream engine if exists...")
     subprocess.run(["docker", "image", "rm", image])
     print("Install acestream engine...")
@@ -121,6 +121,9 @@ def valid_credentials(username, password):
 
 
 # run #########################################################################
+
+
+_ACESTREAM_IMAGE = "wafy80/acestream@sha256:b46cfabb581b27a235106539dfeb06501745486c4bfdc5b012220c06ce72d1f9"
 
 
 def _engine_commands():
@@ -144,7 +147,7 @@ def _engine_commands():
                 " --name acestream"
                 " --publish 6878:6878"
                 " --rm"
-                " wafy80/acestream",
+                f" {_ACESTREAM_IMAGE}",
             ],
             ["docker", "container", "kill", "acestream"],
         )
