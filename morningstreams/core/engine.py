@@ -7,7 +7,7 @@ import click
 
 
 class AcestreamEngine:
-    def __init__(self, start_cmd, stop_cmd, timeout=10):
+    def __init__(self, start_cmd, stop_cmd, timeout=25):
         self.start_cmd = start_cmd
         self.stop_cmd = stop_cmd
         self.timeout = timeout
@@ -21,7 +21,11 @@ class AcestreamEngine:
             return
         print("Starting Acestream engine...", end=" ", flush=True)
         start_time = time.time()
-        subprocess.Popen(self.start_cmd, stdout=subprocess.DEVNULL)
+        subprocess.Popen(
+            self.start_cmd,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
         while time.time() - start_time < self.timeout:
             if self.is_running:
                 print("✓")
