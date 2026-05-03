@@ -19,11 +19,11 @@ program. It can be run on **macOS** and on **raspberry pi**.
 ## :arrow_down: Installation
 
 ```bash
-pipx install morningstreams
+uv tool install morningstreams
 ```
-[pipx](https://pypa.github.io/pipx/) is similar to pip but it is better suited
-to install CLI python application like morningstreams. I suggest you to take a
-look, otherwise you can still use your favorite package manager (e.g. pip).
+[uv](https://docs.astral.sh/uv/) is an extremely fast Python package manager.
+You can also use [pipx](https://pypa.github.io/pipx/) or your favorite package
+manager.
 
 ## :zap: Usage
 
