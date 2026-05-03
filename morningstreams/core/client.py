@@ -48,8 +48,8 @@ class MorningstreamsClient:
         for link in self.get_streams():
             try:
                 int(link["contentId"], 16)  # check if is a acestream link
-                s += f'#EXTINF:-1,{link["title"]}\n'
-                s += f'http://{ip}:6878/ace/getstream?id={link["contentId"]}\n'
+                s += f"#EXTINF:-1,{link['title']}\n"
+                s += f"http://{ip}:6878/ace/getstream?id={link['contentId']}\n"
             except ValueError:
                 pass
         return s
