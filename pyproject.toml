@@ -1,6 +1,6 @@
 [project]
 name = "morningstreams"
-version = "0.2.3"
+dynamic = ["version"]
 description = "Expose acestreams from morningstreams on your local network"
 authors = [{ name = "S1M0N38", email = "bertolottosimone@gmail.com" }]
 license = "MIT"
@@ -18,6 +18,9 @@ morningstreams = "morningstreams.cli:cli"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "morningstreams/__init__.py"
 
 [tool.black]
 line-length = 80
