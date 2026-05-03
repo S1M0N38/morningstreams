@@ -102,7 +102,7 @@ def installer_rpi():
 def installer_macos():
 
     # Download and install acestream-engine for MacOs
-    image = "magnetikonline/acestream-server"
+    image = "wafy80/acestream"
     print("Removing old acestream engine if exists...")
     subprocess.run(["docker", "image", "rm", image])
     print("Install acestream engine...")
@@ -135,20 +135,16 @@ def _engine_commands():
     elif is_macos():
         return (
             [
-                "docker",
-                "run",
-                "--platform",
-                "linux/amd64",
-                "--pull",
-                "never",
-                "--name",
-                "acestream",
-                "--publish",
-                "6878:6878",
-                "--rm",
-                "--tmpfs",
-                "/dev/disk/by-id:noexec,rw,size=4k",
-                "magnetikonline/acestream-server",
+                "bash",
+                "-c",
+                "docker rm -f acestream >/dev/null 2>&1; "
+                "exec docker run"
+                " --platform linux/amd64"
+                " --pull never"
+                " --name acestream"
+                " --publish 6878:6878"
+                " --rm"
+                " wafy80/acestream",
             ],
             ["docker", "container", "kill", "acestream"],
         )
