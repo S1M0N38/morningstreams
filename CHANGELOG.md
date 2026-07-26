@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/S1M0N38/morningstreams/compare/v1.1.0...v1.1.1) (2026-07-26)
+
+
+### Bug Fixes
+
+* **release:** sync package version into __init__.py ([fdb3215](https://github.com/S1M0N38/morningstreams/commit/fdb32154e232327fb701dc2852a6ea2a5c5c57a6))
+
 ## [1.1.0](https://github.com/S1M0N38/morningstreams/compare/v1.0.0...v1.1.0) (2026-07-26)
 
 
