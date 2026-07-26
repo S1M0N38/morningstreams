@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/S1M0N38/morningstreams/compare/v1.0.0...v1.1.0) (2026-07-26)
+
+
+### Features
+
+* **cli:** add --player option to launch media player ([03101a2](https://github.com/S1M0N38/morningstreams/commit/03101a2c5d384c59c9fa2b090cb3047a670b177e))
+
 ## 1.0.0 (2026-05-03)
 
 
