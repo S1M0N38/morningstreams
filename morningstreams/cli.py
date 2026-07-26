@@ -3,13 +3,14 @@ import platform
 
 import click
 
-from . import utils
+from . import __version__, utils
 
 repo = pathlib.Path(__file__).parent.parent
 path_credentials = repo / "credentials.txt"
 
 
 @click.group()
+@click.version_option(version=__version__, prog_name="morningstreams")
 def cli():
     """
     \b
