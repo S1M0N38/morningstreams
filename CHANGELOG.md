@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/S1M0N38/morningstreams/compare/v1.1.1...v1.2.0) (2026-07-26)
+
+
+### Features
+
+* **cli:** add --version option ([88b3298](https://github.com/S1M0N38/morningstreams/commit/88b3298e9b4b33c6eb854fc0a3025bbe3740f523))
+
 ## [1.1.1](https://github.com/S1M0N38/morningstreams/compare/v1.1.0...v1.1.1) (2026-07-26)
 
 
