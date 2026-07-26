@@ -93,11 +93,13 @@ Usage: morningstreams run [OPTIONS]
   Expose streams on your local network
 
 Options:
-  --ip TEXT               Ip where playlist is exposed.  [default: 127.0.0.1]
-  --port INTEGER          Port where playlist is exposed.  [default: 8080]
-  --server / --no-server  Expose playlist.m3u8.  [default: server]
-  --engine / --no-engine  Start acestream engine.  [default: engine]
-  --help                  Show this message and exit.
+  --ip TEXT                Ip where playlist is exposed.  [default: 127.0.0.1]
+  --port INTEGER           Port where playlist is exposed.  [default: 8080]
+  --server / --no-server   Expose playlist.m3u8.  [default: server]
+  --engine / --no-engine   Start acestream engine.  [default: engine]
+  --player [mpv|iina-cli]  Launch media player (mpv or iina-cli) against the
+                           exposed playlist.
+  --help                   Show this message and exit.
 ```
 
 ## :tv: Watch the streams
@@ -110,15 +112,19 @@ see the playlist. I can watch streams with:
 - a TV with LG WebOS thanks to F-Player
 - a computer using a video player which support HTTP Live Stream protocol
 
-On computer I use [mpv](https://mpv.io/) with some options
+On a computer you can let `morningstreams` open the stream for you with the
+`--player` flag (requires [mpv](https://mpv.io/) or
+[iina-cli](https://iina.io/) on your `PATH`):
 ```bash
-mpv --no-resume-playback --rebase-start-time=no\
-    --cache=no --cache-pause-wait=3 --audio-buffer=0\
-    --stream-buffer-size=4k --pause=no\
-    http://192.168.178.101:8080/playlist.m3u8
+morningstreams run --player mpv        # or iina-cli on macOS
 ```
-Just use an alias in your .zshrc/.bashrc to avoid to type this all the time:
-`alias f1="mpv --no-resume-play..."`.
+The player is launched in the background, detached from `morningstreams`, so
+you close it from the player GUI when you are done. Tuned mpv options
+(`--no-resume-playback`, `--cache=no`, `--stream-buffer-size=4k`, ...) are
+baked in for both players so the live stream starts without buffering issues.
+If the chosen player is not installed `morningstreams` prints a warning and
+keeps exposing the stream, so you can still open it manually or watch on
+another device.
 
 
 ## :wrench: How it works 

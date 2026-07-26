@@ -95,6 +95,12 @@ def logout():
     show_default=True,
     help="Start acestream engine.",
 )
+@click.option(
+    "--player",
+    type=click.Choice(["mpv", "iina-cli"]),
+    default=None,
+    help="Launch media player (mpv or iina-cli) against the exposed playlist.",
+)
 def run(**args):
     if not path_credentials.exists():
         msg = "You have to be logged in. Use morningstream login"

@@ -10,6 +10,7 @@ import urllib.request
 
 import click
 
+from .core import player
 from .core.client import MorningstreamsClient
 from .core.engine import AcestreamEngine
 from .core.server import HTTPServer
@@ -161,6 +162,9 @@ def _engine_commands():
 
 
 def run(username, password, args):
+    if args.get("player") and not args["server"]:
+        msg = "--player requires --server to expose the playlist."
+        raise click.UsageError(msg)
 
     # Remove previous playlist
     path_playlist.unlink(missing_ok=True)
@@ -185,6 +189,8 @@ def run(username, password, args):
         if args["server"]:
             address = f"http://{args['ip']}:{args['port']}/playlist.m3u8"
             click.secho(f"Exposing streams at {address}", fg="blue", bold=True)
+            if args["player"]:
+                player.launch(args["player"], address)
 
         # TODO instead of this time.sleep, perform diagnostic about
         # the running stream and reload if it's stuck
