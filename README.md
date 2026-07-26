@@ -148,8 +148,3 @@ Just use an alias in your .zshrc/.bashrc to avoid to type this all the time:
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ └────────────────────────┘
 ```
 
-## :ballot_box_with_check: TODOs
-- [ ] Explain how it works
-- [ ] Healthcheck while stream is running
-- [ ] Option to automatically start player
-- [ ] Weekend schedule
