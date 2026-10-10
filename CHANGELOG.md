@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/S1M0N38/morningstreams/compare/v1.2.0...v1.3.0) (2026-10-10)
+
+
+### Features
+
+* **core:** sort streams by likes count ([fc87f40](https://github.com/S1M0N38/morningstreams/commit/fc87f40545196b724e91f75e10d5d9da81b9bd66))
+
 ## [1.2.0](https://github.com/S1M0N38/morningstreams/compare/v1.1.1...v1.2.0) (2026-07-26)
 
 
