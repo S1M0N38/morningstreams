@@ -50,7 +50,12 @@ class MorningstreamsClient:
 
     def generate_m3u8(self, ip):
         s = "#EXTM3U\n"
-        for link in self.get_streams():
+        streams = sorted(
+            self.get_streams(),
+            key=lambda stream: stream.get("likesCount", 0),
+            reverse=True,
+        )
+        for link in streams:
             try:
                 int(link["contentId"], 16)  # check if is a acestream link
                 s += f"#EXTINF:-1,{link['title']}\n"
